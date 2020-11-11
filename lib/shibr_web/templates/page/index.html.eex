@@ -8,8 +8,9 @@
 </section>
 <%= link("New Dog!", to: Routes.page_path(@conn, :index, @breed), class: "button") %>
 <%= link("Dog History!!!", to: Routes.dog_history_path(@conn, :index), class: "button") %>
+<%= link("Visual Breed Picker", to: Routes.page_path(@conn, :visual), class: "button") %>
 <ul>
-  <%= for breed_image <- @breeds do %>
-    <li> <%= img_tag(breed_image.url) %> <%= link(breed_image.breed, to: Routes.page_path(@conn, :index, breed_image.breed)) %> </li>
+  <%= for breed <- @breeds do %>
+    <li><%= link(breed, to: Routes.page_path(@conn, :index, breed)) %> </li>
   <% end %>
 </ul>

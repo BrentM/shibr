@@ -1,0 +1,5 @@
+<ul>
+  <%= for breed_image <- @breeds do %>
+    <li> <%= img_tag(breed_image.url) %> <%= link(breed_image.breed, to: Routes.page_path(@conn, :index, breed_image.breed)) %> </li>
+  <% end %>
+</ul>

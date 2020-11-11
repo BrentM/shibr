@@ -14,5 +14,5 @@
 
 </ul>
 
-<span><%= link "Edit", to: Routes.dog_history_path(@conn, :edit, @dog_history) %></span>
+<span><%#= link "Edit", to: Routes.dog_history_path(@conn, :edit, @dog_history) %></span>
 <span><%= link "Back", to: Routes.dog_history_path(@conn, :index) %></span>

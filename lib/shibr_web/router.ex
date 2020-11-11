@@ -20,7 +20,9 @@ defmodule ShibrWeb.Router do
 
     get "/breed/:breed", PageController, :index
 
-    resources "/history", DogHistoryController #(left this out so I don't have to fight with route errors right now.) , except: [:new, :create, :edit, :update, :delete]
+    resources "/history", DogHistoryController, except: [:new, :create, :edit, :update]
+    
+    get "/visual", PageController, :visual
   end
 
   # Other scopes may use custom stacks.

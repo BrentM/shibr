@@ -16,8 +16,13 @@ defmodule ShibrWeb.PageController do
     # Save the dog info to the DB
     # TODO verify the dog image URL is what we expect - prevent bad things from untrusted input. Would do this better given more time. Can be added to the changeset.
     Shibr.Dogs.create_dog_history(%{breed: breed, url: main_dog})
-    # Fetch an image URL for each breed
-    tasks = Enum.map(breeds, fn b ->
+    render(conn, "index.html", [main_dog: main_dog, breed: breed, breeds: breeds])
+  end
+
+  def visual(conn, _params) do
+    {:ok, breeds} = Shibr.DogCeo.get_breed_names()
+     # Fetch an image URL for each breed
+     tasks = Enum.map(breeds, fn b ->
       Task.async(fn -> 
         {:ok, dog_url} = Shibr.DogCeo.get_random_dog(b)
         %{breed: b, url: dog_url}
@@ -27,9 +32,6 @@ defmodule ShibrWeb.PageController do
     )
     breed_images = Enum.map(tasks, fn (task) -> Task.await(task) end) # Loose tasks are probably not the best way to handle this but it gets the job done. We should really cache these somewhere.
     Logger.debug(inspect breed_images)
-    render(conn, "index.html", [main_dog: main_dog, breed: breed, breeds: breed_images])
-  end
-
-  def visual(conn, params) do
+    render(conn, "visual.html", [breeds: breed_images])
   end
 end

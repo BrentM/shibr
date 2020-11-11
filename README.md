@@ -52,40 +52,40 @@ Verify production caching plays nice with this.
 ## Future
 Handy as we choose to defer functionality to post-launch
 
-* Cache Breed list API call
-* Cache example breed pictures (thumbs) and URLs.
+  * Cache Breed list API call
+  * Cache example breed pictures (thumbs) and URLs.
 
 # Journal
 
 Share my work so you can see my thought process
 
-* Run the Phoenix bootstrap
-* Define requirements
-* git init and initial commit. Will just work on one branch for this simple proj.
-* fix basic template issues and add some copy
-* Load a static image of a Shiba to get the basic template
-* add Tesla to grab stuff from the dog.ceo API
-* wrapper for dog.ceo API to find any quirks and start getting our random Shibas
-* Let's fetch all the breeds too as long as we are working with the API
-* now that we have a random image and all the breeds lets generalize our random image for arbitrary breeds.
-* Lets get our schema for history into the DB. phx.gen.html does most of the heavy lifting. Creates more than is needed but the extra views and forms tend to be helpful (and are easy to delete if not).
-* I backed off on the requirements a bit to hit the time window. We can add per-dog history back easily with the stored breed.
-* Lets glue all our new history functionality into the templates.
-* We're almost done. Lets just fetch and show a random dog image for all breeds for our "visual" way to select other breeds. I'd probably ask for more input from users for this - this isn't well enough understood to make it worth the dev time (and performance hit) IMO.
-* Just Mapping over all breeds and grabbing an image is unacceptably slow. Let's see if parallelizing it gets us there....
-* Wrapping all the requests in a Task.async gets us to fast-enough. Not a "good" solution but gets the job done given time constraints.
-* I hate the page load time so I'm going to move it to a new route so it doesn't hurt our main pages.
+  * Run the Phoenix bootstrap
+  * Define requirements
+  * git init and initial commit. Will just work on one branch for this simple proj.
+  * fix basic template issues and add some copy
+  * Load a static image of a Shiba to get the basic template
+  * add Tesla to grab stuff from the dog.ceo API
+  * wrapper for dog.ceo API to find any quirks and start getting our random Shibas
+  * Let's fetch all the breeds too as long as we are working with the API
+  * now that we have a random image and all the breeds lets generalize our random image for arbitrary breeds.
+  * Lets get our schema for history into the DB. phx.gen.html does most of the heavy lifting. Creates more than is needed but the extra views and forms tend to be helpful (and are easy to delete if not).
+  * I backed off on the requirements a bit to hit the time window. We can add per-dog history back easily with the stored breed.
+  * Lets glue all our new history functionality into the templates.
+  * We're almost done. Lets just fetch and show a random dog image for all breeds for our "visual" way to select other breeds. I'd probably ask for more input from users for this - this isn't well enough understood to make it worth the dev time (and performance hit) IMO.
+  * Just Mapping over all breeds and grabbing an image is unacceptably slow. Let's see if parallelizing it gets us there....
+  * Wrapping all the requests in a Task.async gets us to fast-enough. Not a "good" solution but gets the job done given time constraints.
+  * I hate the page load time so I'm going to move it to a new route so it doesn't hurt our main pages.
 
 # Thoughts
 
-* I hijacked the page controller for dogs. This is fine in a small project but for a larger/longer-term project I'd make a dog-specific controller so we can separate landing pages from standard dog pages.
-* The dog API has a confusing (and probably redundant) "status" field that needs more investigation. Does this overlap with the standard status codes or does it do something different.
-* Primary keys as UUIDs - not really needed for the project but easy and are really handy if you need to generate an ID outside the DB or in an external system and then import a record.
-* I've left a lot of error handling and testing out. I'll add some failing test stubs for things that should be tested if I have time. This is an experimental project so I've waited until I understand the functionality better before writing tests. For a better defined (or higher risk) project I would do more testing in tandem.
-* I left the dog-history resources in for the purposes of this demo. I would remove access to the edit and new at least - DONE!
-* I like adding a Pre-launch checklist to things
-* Fetching all the breed image URLs each page load isn't a good solution for several reasons. Waffle does a solid job of storing images and it would be reasonable to fetch breed images, store the reference in the DB, resize them to thumbs, store them to S3, and serve them direct to speed everything up. Our standard Server caching may be enough for this depending on our setup...
-* Our default caching might mess with the randomness of our dogs. Should test/verify that we are caching this so we still are getting random dogs and not just hitting cache.
-* Tests are a mess - most are easily cleaned up. New tests will be needed for the dogceo API to make sure we have the error handling right in particular.
-* Dog history is oldest first which is probably backwards for what the user will want to see. No limit on results shown which will be a problem eventually. 
+  * I hijacked the page controller for dogs. This is fine in a small project but for a larger/longer-term project I'd make a dog-specific controller so we can separate landing pages from standard dog pages.
+  * The dog API has a confusing (and probably redundant) "status" field that needs more investigation. Does this overlap with the standard status codes or does it do something different.
+  * Primary keys as UUIDs - not really needed for the project but easy and are really handy if you need to generate an ID outside the DB or in an external system and then import a record.
+  * I've left a lot of error handling and testing out. I'll add some failing test stubs for things that should be tested if I have time. This is an experimental project so I've waited until I understand the functionality better before writing tests. For a better defined (or higher risk) project I would do more testing in tandem.
+  * I left the dog-history resources in for the purposes of this demo. I would remove access to the edit and new at least - DONE!
+  * I like adding a Pre-launch checklist to things
+  * Fetching all the breed image URLs each page load isn't a good solution for several reasons. Waffle does a solid job of storing images and it would be reasonable to fetch breed images, store the reference in the DB, resize them to thumbs, store them to S3, and serve them direct to speed everything up. Our standard Server caching may be enough for this depending on our setup...
+  * Our default caching might mess with the randomness of our dogs. Should test/verify that we are caching this so we still are getting random dogs and not just hitting cache.
+  * Tests are a mess - most are easily cleaned up. New tests will be needed for the dogceo API to make sure we have the error handling right in particular.
+  * Dog history is oldest first which is probably backwards for what the user will want to see. No limit on results shown which will be a problem eventually. 
 

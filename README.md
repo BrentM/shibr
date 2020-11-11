@@ -51,3 +51,4 @@ Share my work so you can see my thought process
 * fix basic template issues and add some copy
 * Load a static image of a Shiba to get the basic template
 * add Tesla to grab stuff from the dog.ceo API
+* wrapper for dog.ceo API to find any quirks and start getting our random Shibas

@@ -4,6 +4,6 @@
 </section>
 
 <section >
-  <%= img_tag(Routes.static_path(@conn, "/images/shiba-5.jpg")) %>
+  <%= img_tag(@main_dog) %>
 </section>
-<%= link("New Dog!", to: Routes.page_path(@conn, :index)) %>
+<%= link("New Dog!", to: Routes.page_path(@conn, :index), class: "button") %>

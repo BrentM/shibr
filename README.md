@@ -12,42 +12,41 @@ To start your Shibr server:
 Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
 
 # Requirements
-
 ## a picture of a Shiba
-I'm assuming that we can just pick a random Shiba picture from dog.ceo
-e.g. https://dog.ceo/api/breed/shiba/images/random
+  * I'm assuming that we can just pick a random Shiba picture from dog.ceo
+  * e.g. https://dog.ceo/api/breed/shiba/images/random
 
 ## a button which changes the Shiba picture
-When the user clicks reload the page with a new shiba photo from dog.ceo
+  * When the user clicks reload the page with a new shiba photo from dog.ceo
 
 ## a view that shows previously displayed Shibas
-The URL for each Shiba photo that is viewed should be stored to the DB
-When a user visits /history the previous 15 Shibas(or other dogs) should be shown.
-All views should be stored together - no per-user history
-Future - delete DB entries when there are more than TDB history urls stored. If we get a lot of page views we might fill up our DB with useless info.
-Future - allow the user to see history for each breed (they are all lumped together for now).
+  * The URL for each Shiba photo that is viewed should be stored to the DB
+  * When a user visits /history the previous 15 Shibas(or other dogs) should be shown.
+  * All views should be stored together - no per-user history
+  * Future - delete DB entries when there are more than TDB history urls stored. If we get a lot of page views we might fill up our DB with useless info.
+  * Future - allow the user to see history for each breed (they are all lumped together for now).
 
 ## a way to switch from viewing Shibas to viewing other breeds
 
-Users can visit /breed/:breed to get another breed of dog.
-Requirements are the same for the new breed as for Shibas
-/history/breed/:breed should show history for the given breed 
-Show a big ugly list of breeds at the bottom of the page to link to each.
-Let's reuse all our code from the Shiba but with a new breed instead of the default "shiba"
-Trap when users enter a non-existent breed - Just show shibas if a breed is not found.
-Future - cache the dog breeds so we don't need to hit the breed list as frequently. (Tesla might do this for us - need to check)
+  * Users can visit /breed/:breed to get another breed of dog.
+  * Requirements are the same for the new breed as for Shibas
+  * /history/breed/:breed should show history for the given breed 
+  * Show a big ugly list of breeds at the bottom of the page to link to each.
+  * Let's reuse all our code from the Shiba but with a new breed instead of the default "shiba"
+  * Trap when users enter a non-existent breed - Just show shibas if a breed is not found.
+  * Future - cache the dog breeds so we don't need to hit the breed list as frequently. (Tesla might do this for us - need to check)
 
 ## a more visual way to select other breeds
-Grab the list from https://dog.ceo/api/breeds/list/all
-~~ Pick 6 breeds at random and also fetch images ~~
-Load an image for all breeds in the big list. A "card" view would look good for this but an ugly list if fine for now until we add some CSS.
-Future - Maybe resize images to thumbnails to speed up page load.
-Future - Cache imagesRLs to speed up page load.
+  * Grab the list from https://dog.ceo/api/breeds/list/all
+  * ~~ Pick 6 breeds at random and also fetch images ~~
+  * Load an image for all breeds in the big list. A "card" view would look good for this but an ugly list if fine for now until we add some CSS.
+  * Future - Maybe resize images to thumbnails to speed up page load.
+  * Future - Cache imagesRLs to speed up page load.
 
 ## Prelaunch cleanup
-Verify inputs from the API better.
-Non-happy path handling for API responses.
-Verify production caching plays nice with this. 
+  * Verify inputs from the API better.
+  * Non-happy path handling for API responses.
+  * Verify production caching plays nice with this. 
 
 ## Future
 Handy as we choose to defer functionality to post-launch
@@ -87,5 +86,6 @@ Share my work so you can see my thought process
   * Fetching all the breed image URLs each page load isn't a good solution for several reasons. Waffle does a solid job of storing images and it would be reasonable to fetch breed images, store the reference in the DB, resize them to thumbs, store them to S3, and serve them direct to speed everything up. Our standard Server caching may be enough for this depending on our setup...
   * Our default caching might mess with the randomness of our dogs. Should test/verify that we are caching this so we still are getting random dogs and not just hitting cache.
   * Tests are a mess - most are easily cleaned up. New tests will be needed for the dogceo API to make sure we have the error handling right in particular.
-  * Dog history is oldest first which is probably backwards for what the user will want to see. No limit on results shown which will be a problem eventually. 
+  * Dog history is oldest first which is probably backwards for what the user will want to see. No limit on results shown which will be a problem eventually.
+  * Adding documentation blocks would be quite helpful if this is going to be maintained. 
 

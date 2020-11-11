@@ -7,8 +7,9 @@
   <%= img_tag(@main_dog) %>
 </section>
 <%= link("New Dog!", to: Routes.page_path(@conn, :index, @breed), class: "button") %>
+<%= link("Dog History!!!", to: Routes.dog_history_path(@conn, :index), class: "button") %>
 <ul>
-  <%= for breed <- @breeds do%>
-    <li> <%= link(breed, to: Routes.page_path(@conn, :index, breed)) %> </li>
+  <%= for breed_image <- @breeds do %>
+    <li> <%= img_tag(breed_image.url) %> <%= link(breed_image.breed, to: Routes.page_path(@conn, :index, breed_image.breed)) %> </li>
   <% end %>
 </ul>

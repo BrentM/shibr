@@ -4,7 +4,7 @@ defmodule Shibr.Dogs.DogHistory do
 
   @primary_key {:id, :binary_id, autogenerate: true}
   @foreign_key_type :binary_id
-  
+
   schema "dog_histories" do
     field :breed, :string
     field :url, :string
@@ -16,6 +16,7 @@ defmodule Shibr.Dogs.DogHistory do
   def changeset(dog_history, attrs) do
     dog_history
     |> cast(attrs, [:breed, :url])
+    # TODO - validate the breed and the URL pattern
     |> validate_required([:breed, :url])
   end
 end

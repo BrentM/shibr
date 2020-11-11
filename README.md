@@ -68,6 +68,9 @@ Share my work so you can see my thought process
 * I backed off on the requirements a bit to hit the time window. We can add per-dog history back easily with the stored breed.
 * Lets glue all our new history functionality into the templates.
 * We're almost done. Lets just fetch and show a random dog image for all breeds for our "visual" way to select other breeds. I'd probably ask for more input from users for this - this isn't well enough understood to make it worth the dev time (and performance hit) IMO.
+* Just Mapping over all breeds and grabbing an image is unacceptably slow. Let's see if parallelizing it gets us there....
+* Wrapping all the requests in a Task.async gets us to fast-enough. Not a "good" solution but gets the job done given time constraints.
+* I hate the page load time so I'm going to move it to a new route so it doesn't hurt our main pages.
 
 # Thoughts
 
@@ -77,3 +80,4 @@ Share my work so you can see my thought process
 * I've left a lot of error handling and testing out. I'll add some failing test stubs for things that should be tested if I have time. This is an experimental project so I've waited until I understand the functionality better before writing tests. For a better defined (or higher risk) project I would do more testing in tandem.
 * I left the dog-history resources in for the purposes of this demo. I would remove access to the edit
 * I like adding a Pre-launch checklist to things
+* Fetching all the breed image URLs each page load isn't a good solution for several reasons. Waffle does a solid job of storing images and it would be reasonable to fetch breed images, store the reference in the DB, resize them to thumbs, store them to S3, and serve them direct to speed everything up. 

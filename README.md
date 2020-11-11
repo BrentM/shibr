@@ -52,3 +52,5 @@ Share my work so you can see my thought process
 * Load a static image of a Shiba to get the basic template
 * add Tesla to grab stuff from the dog.ceo API
 * wrapper for dog.ceo API to find any quirks and start getting our random Shibas
+* Let's fetch all the breeds too as long as we are working with the API
+* now that we have a random image and all the breeds lets generalize our random image for arbitrary breeds.

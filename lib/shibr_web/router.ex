@@ -19,6 +19,8 @@ defmodule ShibrWeb.Router do
     get "/", PageController, :index
 
     get "/breed/:breed", PageController, :index
+
+    resources "/history", DogHistoryController
   end
 
   # Other scopes may use custom stacks.

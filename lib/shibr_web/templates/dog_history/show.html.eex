@@ -1,0 +1,18 @@
+<h1>Show Dog history</h1>
+
+<ul>
+
+  <li>
+    <strong>Breed:</strong>
+    <%= @dog_history.breed %>
+  </li>
+
+  <li>
+    <strong>Url:</strong>
+    <%= @dog_history.url %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: Routes.dog_history_path(@conn, :edit, @dog_history) %></span>
+<span><%= link "Back", to: Routes.dog_history_path(@conn, :index) %></span>

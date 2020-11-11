@@ -1,0 +1,5 @@
+<h1>Edit Dog history</h1>
+
+<%= render "form.html", Map.put(assigns, :action, Routes.dog_history_path(@conn, :update, @dog_history)) %>
+
+<span><%= link "Back", to: Routes.dog_history_path(@conn, :index) %></span>

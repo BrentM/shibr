@@ -1,0 +1,28 @@
+<h1>Listing Dog histories</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Breed</th>
+      <th>Url</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for dog_history <- @dog_histories do %>
+    <tr>
+      <td><%= dog_history.breed %></td>
+      <td><%= dog_history.url %></td>
+
+      <td>
+        <span><%= link "Show", to: Routes.dog_history_path(@conn, :show, dog_history) %></span>
+        <span><%= link "Edit", to: Routes.dog_history_path(@conn, :edit, dog_history) %></span>
+        <span><%= link "Delete", to: Routes.dog_history_path(@conn, :delete, dog_history), method: :delete, data: [confirm: "Are you sure?"] %></span>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<span><%= link "New Dog history", to: Routes.dog_history_path(@conn, :new) %></span>

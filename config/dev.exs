@@ -3,7 +3,7 @@ use Mix.Config
 # Configure your database
 config :shibr, Shibr.Repo,
   username: "postgres",
-  password: "LPC2148",
+  password: "LPC2148", # In my infinite wisdom I changed the default PW on my local machine... would not do again.
   database: "shibr_dev",
   hostname: "localhost",
   show_sensitive_data_on_connection_error: true,

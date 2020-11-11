@@ -47,9 +47,13 @@ Future - Cache imagesRLs to speed up page load.
 ## Prelaunch cleanup
 Verify inputs from the API better.
 Non-happy path handling for API responses.
+Verify production caching plays nice with this. 
 
 ## Future
-Empty for now but handy as we choose to defer functionality to post-launch
+Handy as we choose to defer functionality to post-launch
+
+* Cache Breed list API call
+* Cache example breed pictures (thumbs) and URLs.
 
 # Journal
 
@@ -78,6 +82,10 @@ Share my work so you can see my thought process
 * The dog API has a confusing (and probably redundant) "status" field that needs more investigation. Does this overlap with the standard status codes or does it do something different.
 * Primary keys as UUIDs - not really needed for the project but easy and are really handy if you need to generate an ID outside the DB or in an external system and then import a record.
 * I've left a lot of error handling and testing out. I'll add some failing test stubs for things that should be tested if I have time. This is an experimental project so I've waited until I understand the functionality better before writing tests. For a better defined (or higher risk) project I would do more testing in tandem.
-* I left the dog-history resources in for the purposes of this demo. I would remove access to the edit
+* I left the dog-history resources in for the purposes of this demo. I would remove access to the edit and new at least - DONE!
 * I like adding a Pre-launch checklist to things
-* Fetching all the breed image URLs each page load isn't a good solution for several reasons. Waffle does a solid job of storing images and it would be reasonable to fetch breed images, store the reference in the DB, resize them to thumbs, store them to S3, and serve them direct to speed everything up. 
+* Fetching all the breed image URLs each page load isn't a good solution for several reasons. Waffle does a solid job of storing images and it would be reasonable to fetch breed images, store the reference in the DB, resize them to thumbs, store them to S3, and serve them direct to speed everything up. Our standard Server caching may be enough for this depending on our setup...
+* Our default caching might mess with the randomness of our dogs. Should test/verify that we are caching this so we still are getting random dogs and not just hitting cache.
+* Tests are a mess - most are easily cleaned up. New tests will be needed for the dogceo API to make sure we have the error handling right in particular.
+* Dog history is oldest first which is probably backwards for what the user will want to see. No limit on results shown which will be a problem eventually. 
+

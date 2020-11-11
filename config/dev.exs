@@ -3,7 +3,7 @@ use Mix.Config
 # Configure your database
 config :shibr, Shibr.Repo,
   username: "postgres",
-  password: "postgres",
+  password: "LPC2148",
   database: "shibr_dev",
   hostname: "localhost",
   show_sensitive_data_on_connection_error: true,

@@ -47,4 +47,7 @@ Share my work so you can see my thought process
 
 * Run the Phoenix bootstrap
 * Define requirements
-* 
+* git init and initial commit. Will just work on one branch for this simple proj.
+* fix basic template issues and add some copy
+* Load a static image of a Shiba to get the basic template
+* add Tesla to grab stuff from the dog.ceo API
